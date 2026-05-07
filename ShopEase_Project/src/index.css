@@ -1,0 +1,194 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========================================
+   DESIGN TOKENS & CSS VARIABLES
+   ======================================== */
+:root {
+  --color-forest: #2D5A27;
+  --color-forest-light: #5fa858;
+  --color-forest-dark: #1f401b;
+  --color-surface: #F7F7F7;
+  --color-charcoal: #1A1A1A;
+  --color-grey-medium: #6B7280;
+  --color-grey-light: #E5E7EB;
+  --color-white: #FFFFFF;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  --radius-card: 1.5rem;
+  --radius-button: 1rem;
+  --radius-pill: 9999px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 16px 50px rgba(0, 0, 0, 0.12);
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 400ms ease-out;
+
+  --bottom-nav-height: 5rem;
+}
+
+/* ========================================
+   BASE STYLES
+   ======================================== */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100dvh;
+}
+
+/* Main content area accounts for bottom nav */
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-grey-light);
+  border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-grey-medium);
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
+@layer components {
+  .btn-primary {
+    @apply bg-forest-500 text-white font-semibold py-3 px-6 rounded-2xl
+           transition-all duration-200 ease-out
+           hover:bg-forest-600 active:scale-[0.97]
+           focus:outline-none focus:ring-2 focus:ring-forest-300 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-charcoal font-medium py-3 px-6 rounded-2xl border border-grey-light
+           transition-all duration-200 ease-out
+           hover:bg-surface active:scale-[0.97]
+           focus:outline-none focus:ring-2 focus:ring-grey-light focus:ring-offset-2;
+  }
+
+  .card {
+    @apply bg-white rounded-3xl shadow-sm border border-grey-light/50
+           transition-all duration-200 ease-out;
+  }
+
+  .card-interactive {
+    @apply card hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer;
+  }
+
+  .glass {
+    @apply bg-white/80 backdrop-blur-lg border border-white/20;
+  }
+
+  .text-label {
+    @apply text-xs font-medium uppercase tracking-wider text-grey-medium;
+  }
+
+  .page-container {
+    @apply flex-1 px-4 pt-4 pb-24 max-w-md mx-auto w-full;
+  }
+
+  .section-title {
+    @apply text-lg font-bold text-charcoal mb-3;
+  }
+
+  /* Language transition */
+  .lang-transition {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .lang-fade-enter {
+    animation: langFadeIn 0.3s ease-out;
+  }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+@keyframes langFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered animation for lists */
+.stagger-item {
+  animation: floatUp 0.4s ease-out both;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0ms; }
+.stagger-item:nth-child(2) { animation-delay: 60ms; }
+.stagger-item:nth-child(3) { animation-delay: 120ms; }
+.stagger-item:nth-child(4) { animation-delay: 180ms; }
+.stagger-item:nth-child(5) { animation-delay: 240ms; }
+.stagger-item:nth-child(6) { animation-delay: 300ms; }
+.stagger-item:nth-child(7) { animation-delay: 360ms; }
+.stagger-item:nth-child(8) { animation-delay: 420ms; }
+
+/* Horizontal scroll container */
+.scroll-snap-x {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-snap-x > * {
+  scroll-snap-align: start;
+}
+
+/* Modal overlay */
+.modal-overlay {
+  @apply fixed inset-0 bg-black/40 backdrop-blur-sm z-50
+         transition-opacity duration-300;
+}
+
+.modal-content {
+  @apply fixed bottom-0 left-0 right-0 bg-white rounded-t-3xl z-50
+         max-h-[90vh] overflow-y-auto
+         transition-transform duration-300 ease-out;
+}
