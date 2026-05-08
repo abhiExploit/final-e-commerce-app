@@ -26,9 +26,9 @@ export default function AccountPage() {
           <User size={24} className="text-white" />
         </div>
         <div className="flex-1">
-          <h2 className="text-base font-bold text-charcoal">Adarsha</h2>
-          <p className="text-xs text-grey-medium">adarsha@email.com</p>
-          <p className="text-[10px] text-grey-medium mt-0.5">{t('memberSince')} Jan 2024</p>
+          <h2 className="text-base font-bold text-charcoal">Abhilash S.A</h2>
+          <p className="text-xs text-grey-medium">abhilash6480@gmail.com</p>
+          <p className="text-[10px] text-grey-medium mt-0.5">{t('memberSince')} Jan 2004</p>
         </div>
         <ChevronRight size={18} className="text-grey-light" />
       </div>
